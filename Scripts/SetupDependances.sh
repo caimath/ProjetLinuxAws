@@ -35,6 +35,7 @@ sudo firewall-cmd --reload
 
 # Rendre les scripts exécutables
 sudo chmod +x *.sh
+sudo chmod +x ./*.sh
 
 
 # Appeler les modules

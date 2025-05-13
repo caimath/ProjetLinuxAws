@@ -27,7 +27,7 @@ done
 # Créer la zone directe
 echo "[*] Création de la zone directe..."
 sudo tee "$ZONE_FILE" > /dev/null <<EOF
-$TTL 86400
+\$TTL 86400
 @   IN  SOA ns1.${DOMAIN}. admin.${DOMAIN}. (
         $SERIAL ; Serial
         3600    ; Refresh
@@ -42,7 +42,7 @@ EOF
 # Créer la zone reverse
 echo "[*] Création de la zone reverse..."
 sudo tee "$REVERSE_ZONE_FILE" > /dev/null <<EOF
-$TTL 86400
+\$TTL 86400
 @   IN  SOA ns1.${DOMAIN}. admin.${DOMAIN}. (
         $SERIAL ; Serial
         3600    ; Refresh
@@ -53,7 +53,6 @@ $TTL 86400
 @       IN  NS  ns1.${DOMAIN}.
 29      IN  PTR ns1.${DOMAIN}.
 EOF
-
 
 # Ajouter les zones dans named.conf si elles ne sont pas déjà présentes
 if ! grep -q "$DOMAIN" "$NAMED_CONF"; then
@@ -78,8 +77,8 @@ fi
 
 # Vérification des fichiers de zone
 echo "Vérification des fichiers de zone"
-sudo named-checkzone "$DOMAIN" "$ZONE_FILE"
-sudo named-checkzone "$REVERSE_ZONE" "$REVERSE_ZONE_FILE"
+sudo named-checkzone "$DOMAIN" "$ZONE_FILE" || { echo "Erreur dans la zone directe"; exit 1; }
+sudo named-checkzone "$REVERSE_ZONE" "$REVERSE_ZONE_FILE" || { echo "Erreur dans la zone reverse"; exit 1; }
 
 # Redémarrer le service BIND
 echo "Redémarrage du service named."
