@@ -11,8 +11,8 @@ sudo dnf install -y \
   firewalld \
   net-tools \
   php php-mysqlnd \
-  mod_ssl \
 
+sudo dnf install -y mod_ssl
 
 # Demande interactive du nom du client
 read -p "Entrez le nom du client (ex: client1) : " CLIENT

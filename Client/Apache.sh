@@ -8,6 +8,18 @@ VHOST_CONF="/etc/httpd/conf.d/$CLIENT.conf"
 CERT_FILE="/etc/pki/tls/certs/$DOMAIN.crt"
 KEY_FILE="/etc/pki/tls/private/$DOMAIN.key"
 
+# Générer certificat auto-signé s'il n'existe pas déjà
+if [[ ! -f "$CERT_FILE" || ! -f "$KEY_FILE" ]]; then
+    echo "[*] Générer un certificat auto-signé pour $DOMAIN"
+    sudo openssl req -x509 -nodes -days 365 \
+        -newkey rsa:2048 \
+        -keyout "$KEY_FILE" \
+        -out "$CERT_FILE" \
+        -subj "/C=BE/ST=Hainaut/L=Mons/O=ProjetLinux/OU=Web/CN=$DOMAIN"
+else
+    echo "[*] Certificat déjà existant pour $DOMAIN, pas de régénération"
+fi
+
 # Créer un fichier de configuration Apache pour le client avec HTTP + HTTPS
 sudo bash -c "cat > $VHOST_CONF <<EOF
 # Redirection HTTP -> HTTPS
