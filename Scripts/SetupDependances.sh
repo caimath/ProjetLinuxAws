@@ -25,7 +25,9 @@ sudo systemctl enable --now mariadb
 sudo systemctl enable --now firewalld
 
 sudo firewall-cmd --permanent --add-service=dns
+sudo firewall-cmd --permanent --add-service=ssh
 sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
 sudo firewall-cmd --permanent --add-service=ftp
 sudo firewall-cmd --permanent --add-port=30000-30100/tcp
 sudo firewall-cmd --permanent --add-service=samba

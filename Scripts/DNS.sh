@@ -29,6 +29,7 @@ sudo tee "$ZONE_FILE" > /dev/null <<EOF
         86400 ) ; Minimum TTL
 
 @       IN  NS  ns1.${DOMAIN}.
+@       IN  A   ${DNS_IP}
 ns1     IN  A   ${DNS_IP}
 EOF
 
@@ -50,14 +51,36 @@ echo "[*] Droits SELinux + permissions"
 sudo chown named:named "$ZONE_FILE" "$REVERSE_ZONE_FILE"
 sudo restorecon "$ZONE_FILE" "$REVERSE_ZONE_FILE"
 
-echo "[*] Nettoyage et mise à jour de named.conf"
+echo "[*] Écriture complète du fichier named.conf avec cat <<EOF"
 sudo cp "$NAMED_CONF" "${NAMED_CONF}.bak"
 
-sudo tee -a EOF
+sudo cat <<EOF > "$NAMED_CONF"
+options {
+    listen-on port 53 { 127.0.0.1; 10.42.0.29; }; ### DNS principal ###
+    directory     "/var/named";
+    dump-file     "/var/named/data/cache_dump.db";
+    statistics-file "/var/named/data/named_stats.txt";
+    memstatistics-file "/var/named/data/named_mem_stats.txt";
+    allow-query { localhost; any; }; ### Clients VPN ###
+    recursion yes;
+    dnssec-validation yes;
+    bindkeys-file "/etc/named.iscdlv.key";
+    managed-keys-directory "/var/named/dynamic";
+    pid-file "/run/named/named.pid";
+    session-keyfile "/run/named/session.key";
+};
 
-if ! grep -q "$DOMAIN" "$NAMED_CONF"; then
-  echo "[*] Ajout des zones dans named.conf"
-  sudo tee -a "$NAMED_CONF" > /dev/null <<EOF
+logging {
+    channel default_debug {
+        file "data/named.run";
+        severity dynamic;
+    };
+};
+
+zone "." IN {
+    type hint;
+    file "named.ca";
+};
 
 zone "$DOMAIN" IN {
     type master;
@@ -71,7 +94,6 @@ zone "$REVERSE_ZONE" IN {
     allow-update { none; };
 };
 EOF
-fi
 
 echo "[*] Vérification des fichiers de zone"
 sudo named-checkzone "$DOMAIN" "$ZONE_FILE"

@@ -9,7 +9,7 @@ VHOST_CONF="/etc/httpd/conf.d/$CLIENT.conf"
 # Créer un fichier de configuration Apache pour le client
 sudo bash -c "cat > $VHOST_CONF <<EOF
 <VirtualHost *:80>
-    ServerAdmin webmaster@$DOMAIN
+    ServerAdmin mathias.carsault@std.heh.be
     DocumentRoot $DOCUMENT_ROOT
     ServerName $DOMAIN
     ErrorLog ${APACHE_LOG_DIR}/error.log
