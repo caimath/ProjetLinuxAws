@@ -21,6 +21,17 @@ if [[ -z "$CLIENT" ]]; then
   exit 1
 fi
 
+# Demande un mot de passe à l'utilisateur
+read -s -p "Mot de passe FTP pour $CLIENT : " FTP_PASSWORD
+echo
+read -s -p "Confirmez le mot de passe : " FTP_PASSWORD_CONFIRM
+echo
+
+if [ "$FTP_PASSWORD" != "$FTP_PASSWORD_CONFIRM" ]; then
+    echo "Les mots de passe ne correspondent pas. Abandon."
+    exit 1
+fi
+
 # Variables
 DOMAIN="$CLIENT.tungtungsahur.lan"
 
@@ -32,7 +43,7 @@ sudo chmod +x *.sh
 
 
 # Appel des modules
-sudo ./Environnement.sh "$CLIENT" "$DOMAIN"
+sudo ./Environnement.sh "$CLIENT" "$DOMAIN" "$FTP_PASSWORD"
 sudo ./Apache.sh "$CLIENT" "$DOMAIN"
 sudo ./FTP.sh "$CLIENT"
 sudo ./Samba.sh "$CLIENT"

@@ -5,20 +5,10 @@ CLIENT=$1
 DOMAIN=$2
 DOCUMENT_ROOT="/var/www/$CLIENT"
 FTP_USER=$CLIENT
+FTP_PASSWORD=$3
 DB_NAME="$CLIENT_db"
 DB_USER="$CLIENT_user"
 DB_PASS=$(openssl rand -base64 12)
-
-# Demande un mot de passe à l'utilisateur
-read -s -p "Mot de passe FTP pour $CLIENT : " FTP_PASSWORD
-echo
-read -s -p "Confirmez le mot de passe : " FTP_PASSWORD_CONFIRM
-echo
-
-if [ "$FTP_PASSWORD" != "$FTP_PASSWORD_CONFIRM" ]; then
-    echo "Les mots de passe ne correspondent pas. Abandon."
-    exit 1
-fi
 
 # Créer un utilisateur pour le client
 sudo useradd -m -s /bin/bash $CLIENT
