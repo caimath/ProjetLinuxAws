@@ -1,4 +1,4 @@
-#!/bin/
+#!/bin/bash
 
 # Installer vsftpd si pas encore installé
 sudo dnf install -y vsftpd
