@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -euo pipefail  # Better error handling
-
 # Variables
 NFS_SHARE_DIR="/srv/nfs/share"
 EXPORTS_FILE="/etc/exports"
