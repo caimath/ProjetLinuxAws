@@ -1,7 +1,17 @@
 #!/bin/bash
 
-# Variables
-DOMAIN="$CLIENT.tungtungsahur.lan"
+# Installer les dépendances nécessaires pour le serveur
+sudo dnf install -y \
+  bind bind-utils \
+  httpd \
+  vsftpd \
+  samba samba-client samba-common \
+  nfs-utils \
+  mariadb-server mariadb \
+  firewalld \
+  net-tools \
+  php php-mysqlnd
+
 
 # Demande interactive du nom du client
 read -p "Entrez le nom du client (ex: client1) : " CLIENT
@@ -11,6 +21,8 @@ if [[ -z "$CLIENT" ]]; then
   exit 1
 fi
 
+# Variables
+DOMAIN="$CLIENT.tungtungsahur.lan"
 
 # Affichage du résumé
 echo "Configuration en cours pour le client : $CLIENT avec le domaine : $DOMAIN"

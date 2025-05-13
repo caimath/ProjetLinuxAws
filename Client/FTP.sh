@@ -5,7 +5,7 @@ CLIENT=$1
 DOCUMENT_ROOT="/var/www/$CLIENT"
 
 # Installer vsftpd si nécessaire
-sudo yum install -y vsftpd
+sudo dnf install -y vsftpd
 
 # Ajouter un utilisateur FTP
 echo "$CLIENT" | sudo tee -a /etc/vsftpd/user_list

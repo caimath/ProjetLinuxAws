@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo dnf install -y bind bind-utils
+
 CLIENT=$1
 DOMAIN="tungtungsahur.lan"
 ZONE_FILE="/var/named/${DOMAIN}.zone"

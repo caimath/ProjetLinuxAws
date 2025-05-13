@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+sudo dnf install -y bind bind-utils
+
 DOMAIN="tungtungsahur.lan"
 ZONE_NAME="${DOMAIN}"
 ZONE_FILE="/var/named/${ZONE_NAME}.zone"
