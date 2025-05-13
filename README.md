@@ -11,7 +11,8 @@ Projet linux dans AWS
 * [x] Apache & Apache client
 * [x] FTP
 * [x] FTP Client (MDP se crée mal)
-* [ ] Certificat SSL/TLS pour FTP
+* [x] Certificat SSL/TLS pour FTP
+* [ ] Certificat SSL/TLS pour https
 * [ ] MariaDB ou Mysql
 * [ ] Monitoring
 * [ ] NTP
@@ -19,3 +20,4 @@ Projet linux dans AWS
 * [ ] FW
 * [ ] SELinux
 * [ ] Antivirus
+* [ ] LVM
