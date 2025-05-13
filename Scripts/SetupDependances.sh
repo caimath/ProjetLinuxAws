@@ -9,7 +9,7 @@ sudo dnf install -y \
   vsftpd \
   samba samba-client samba-common \
   nfs-utils \
-  mariadb-server mariadb \
+  mariadb105-server \
   firewalld \
   net-tools \
   php php-mysqlnd
@@ -34,7 +34,7 @@ sudo firewall-cmd --permanent --add-service=mysql
 sudo firewall-cmd --reload
 
 # Rendre les scripts exécutables
-chmod +x *.sh
+sudo chmod +x *.sh
 
 
 # Appeler les modules
