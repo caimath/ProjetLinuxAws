@@ -1,66 +1,49 @@
 #!/bin/bash
 
-# === Script Environnement utilisateur (avec SSL Apache) ===
-
-# Vérifications
-if [ $# -ne 3 ]; then
-  echo "Usage: $0 <nom_client> <domaine_complet> <mot_de_passe_ftp>"
-  exit 1
-fi
-
+# Variables
 CLIENT=$1
-DOMAIN=$2
-FTP_PASSWORD=$3
+DOMAIN="$CLIENT.tungtungsahur.lan"
 DOCUMENT_ROOT="/var/www/$CLIENT"
-FTP_USER=$CLIENT
-DB_NAME="${CLIENT}_db"
-DB_USER="${CLIENT}_user"
-DB_PASS=$(openssl rand -base64 12)
+VHOST_CONF="/etc/httpd/conf.d/$CLIENT.conf"
+CERT_FILE="/etc/pki/tls/certs/$DOMAIN.crt"
+KEY_FILE="/etc/pki/tls/private/$DOMAIN.key"
 
-# === Création de l'utilisateur système ===
-sudo useradd -m -s /bin/bash "$CLIENT"
+# Créer un fichier de configuration Apache pour le client avec HTTP + HTTPS
+sudo bash -c "cat > $VHOST_CONF <<EOF
+# Redirection HTTP -> HTTPS
+<VirtualHost *:80>
+    ServerName $DOMAIN
+    Redirect permanent / https://$DOMAIN/
+</VirtualHost>
 
-# === Création du dossier web ===
-sudo mkdir -p "$DOCUMENT_ROOT"
-sudo chown -R "$CLIENT:$CLIENT" "$DOCUMENT_ROOT"
-sudo chmod -R 755 "$DOCUMENT_ROOT"
+# VirtualHost HTTPS
+<VirtualHost *:443>
+    ServerAdmin mathias.carsault@std.heh.be
+    DocumentRoot $DOCUMENT_ROOT
+    ServerName $DOMAIN
+    ErrorLog /var/log/httpd/${CLIENT}_error.log
+    CustomLog /var/log/httpd/${CLIENT}_access.log combined
 
-# === Définir le mot de passe système ===
-echo "$FTP_USER:$FTP_PASSWORD" | sudo chpasswd
+    SSLEngine on
+    SSLCertificateFile $CERT_FILE
+    SSLCertificateKeyFile $KEY_FILE
 
-# === Ajout à la liste FTP si nécessaire ===
-grep -q "^$FTP_USER$" /etc/vsftpd/user_list || echo "$FTP_USER" | sudo tee -a /etc/vsftpd/user_list > /dev/null
+    <Directory $DOCUMENT_ROOT>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+EOF"
 
-# === Configuration FTP ===
-sudo usermod -d "$DOCUMENT_ROOT" "$FTP_USER"
-sudo chown "$FTP_USER:$FTP_USER" "$DOCUMENT_ROOT"
-
-# === Création du fichier index.html si inexistant ===
-INDEX_FILE="$DOCUMENT_ROOT/index.html"
-if [ ! -f "$INDEX_FILE" ]; then
-  echo "<h1>Bienvenue sur votre domaine $CLIENT : $DOMAIN</h1>" | sudo tee "$INDEX_FILE" > /dev/null
-  sudo chown "$CLIENT:$CLIENT" "$INDEX_FILE"
+# Crée un fichier index.html par défaut
+if [ ! -f "$DOCUMENT_ROOT/index.html" ]; then
+    echo "<h1>Bienvenue sur votre domaine $CLIENT: $DOMAIN </h1>" | sudo tee "$DOCUMENT_ROOT/index.html" > /dev/null
+    sudo chown -R apache:apache "$DOCUMENT_ROOT"
 fi
 
-# === Configuration de la base de données ===
-sudo mysql -e "CREATE DATABASE $DB_NAME;"
-sudo mysql -e "CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS';"
-sudo mysql -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';"
-sudo mysql -e "FLUSH PRIVILEGES;"
-
-# === Appel au script de génération SSL pour Apache ===
-if [ -x "./SetupApacheSSL.sh" ]; then
-  sudo ./SetupApacheSSL.sh "$DOMAIN"
-else
-  echo "⚠️  SetupApacheSSL.sh est introuvable ou non exécutable dans le répertoire courant."
-fi
-
-# === Résumé ===
-echo "✅ Utilisateur $CLIENT configuré."
-echo "🌐 Domaine : $DOMAIN"
-echo "📁 Dossier web : $DOCUMENT_ROOT"
-echo "🔐 Utilisateur FTP : $FTP_USER"
-echo "🔑 Mot de passe FTP : $FTP_PASSWORD"
-echo "🛢️  Base de données : $DB_NAME"
-echo "👤 Utilisateur DB : $DB_USER"
-echo "🔐 Mot de passe DB : $DB_PASS"
+# Redémarrer Apache
+sudo systemctl restart httpd
+echo "Le site $DOMAIN est configuré avec HTTP → HTTPS"
+echo "DocumentRoot : $DOCUMENT_ROOT"
+echo "Fichier de configuration : $VHOST_CONF"
