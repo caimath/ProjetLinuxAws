@@ -33,5 +33,15 @@ sudo firewall-cmd --permanent --add-service=nfs
 sudo firewall-cmd --permanent --add-service=mysql
 sudo firewall-cmd --reload
 
+# Rendre les scripts exécutables
+chmod +x *.sh
 
 
+# Appeler les modules
+sudo ./DNS.sh
+# sudo ./SSH.sh
+# sudo ./Fail2Ban.sh
+sudo ./FTP.sh
+sudo ./NFSSamba.sh
+
+echo "Configuration terminée."

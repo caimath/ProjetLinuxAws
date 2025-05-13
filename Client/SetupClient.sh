@@ -27,11 +27,15 @@ DOMAIN="$CLIENT.tungtungsahur.lan"
 # Affichage du résumé
 echo "Configuration en cours pour le client : $CLIENT avec le domaine : $DOMAIN"
 
+# Rendre les scripts exécutables
+sudo chmod +x *.sh
+
+
 # Appel des modules
-./Environnement.sh "$CLIENT" "$DOMAIN"
-./Apache.sh "$CLIENT" "$DOMAIN"
-./FTP.sh "$CLIENT"
-./Samba.sh "$CLIENT"
-./DNSClient.sh "$CLIENT"
+sudo ./Environnement.sh "$CLIENT" "$DOMAIN"
+sudo ./Apache.sh "$CLIENT" "$DOMAIN"
+sudo ./FTP.sh "$CLIENT"
+sudo ./Samba.sh "$CLIENT"
+sudo ./DNSClient.sh "$CLIENT"
 
 echo "Configuration terminée pour $CLIENT."
