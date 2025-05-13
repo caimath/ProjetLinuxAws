@@ -10,7 +10,7 @@ Projet linux dans AWS
 * [x] DNS client
 * [x] Apache & Apache client
 * [x] FTP
-* [ ] FTP Client (MDP se crée mal)
+* [x] FTP Client (MDP se crée mal)
 * [ ] Certificat SSL/TLS pour FTP
 * [ ] MariaDB ou Mysql
 * [ ] Monitoring
