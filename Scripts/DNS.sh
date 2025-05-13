@@ -16,12 +16,6 @@ SERIAL=$(date +%Y%m%d)01
 echo "Installation de BIND si nécessaire"
 sudo dnf install -y bind bind-utils
 
-# Modifier la configuration de named.conf si nécessaire
-echo "[*] Vérification de la configuration de named.conf..."
-
-sudo sed -i 's/listen-on port 53 {.*}/listen-on port 53 { any; };/' "$NAMED_CONF"
-sudo sed -i 's/allow-query {.*}/allow-query { any; };/' "$NAMED_CONF"
-
 # Supprimer les fichiers de zone existants pour éviter les conflits
 for FILE in "$ZONE_FILE" "$REVERSE_ZONE_FILE"; do
   if [ -f "$FILE" ]; then
@@ -32,37 +26,33 @@ done
 
 # Créer la zone directe
 echo "[*] Création de la zone directe..."
-sudo tee "$ZONE_FILE" > /dev/null <<'EOF'
-$TTL 86400
-@   IN  SOA ns1.tungtungsahur.lan. admin.tungtungsahur.lan. (
-        2025051301 ; Serial
-        3600       ; Refresh
-        1800       ; Retry
-        1209600    ; Expire
-        86400 )    ; Minimum TTL
+sudo tee "$ZONE_FILE" > /dev/null <<EOF
+\$TTL 86400
+@   IN  SOA ns1.${DOMAIN}. admin.${DOMAIN}. (
+        $SERIAL ; Serial
+        3600    ; Refresh
+        1800    ; Retry
+        1209600 ; Expire
+        86400 ) ; Minimum TTL
 
-@       IN  NS  ns1.tungtungsahur.lan.
-ns1     IN  A   10.42.0.29
+@       IN  NS  ns1.${DOMAIN}.
+ns1     IN  A   ${DNS_IP}
 EOF
 
 # Créer la zone reverse
 echo "[*] Création de la zone reverse..."
-sudo tee "$REVERSE_ZONE_FILE" > /dev/null <<'EOF'
-$TTL 86400
-@   IN  SOA ns1.tungtungsahur.lan. admin.tungtungsahur.lan. (
-        2025051301 ; Serial
-        3600       ; Refresh
-        1800       ; Retry
-        1209600    ; Expire
-        86400 )    ; Minimum TTL
+sudo tee "$REVERSE_ZONE_FILE" > /dev/null <<EOF
+\$TTL 86400
+@   IN  SOA ns1.${DOMAIN}. admin.${DOMAIN}. (
+        $SERIAL ; Serial
+        3600    ; Refresh
+        1800    ; Retry
+        1209600 ; Expire
+        86400 ) ; Minimum TTL
 
-@       IN  NS  ns1.tungtungsahur.lan.
-29      IN  PTR ns1.tungtungsahur.lan.
+@       IN  NS  ns1.${DOMAIN}.
+29      IN  PTR ns1.${DOMAIN}.
 EOF
-
-# Donner les bonnes permissions + contexte SELinux
-sudo chown named:named "$ZONE_FILE" "$REVERSE_ZONE_FILE"
-sudo restorecon "$ZONE_FILE" "$REVERSE_ZONE_FILE"
 
 # Ajouter les zones dans named.conf si elles ne sont pas déjà présentes
 if ! grep -q "$DOMAIN" "$NAMED_CONF"; then
@@ -95,4 +85,4 @@ echo "Redémarrage du service named."
 sudo systemctl enable --now named
 sudo systemctl restart named
 
-echo "✅ Configuration DNS terminée avec succès pour le domaine $DOMAIN"
+echo "Configuration DNS terminée avec succès pour le domaine $DOMAIN"
