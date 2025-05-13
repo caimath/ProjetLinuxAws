@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Script de configuration du serveur FTP avec vsftpd
+# Ce script installe et configure le serveur FTP vsftpd sur un système Linux.
+# Il ne crée aucun utilisateur FTP, mais configure le service pour qu'il soit prêt à l'emploi.
 
 set -euo pipefail
 
