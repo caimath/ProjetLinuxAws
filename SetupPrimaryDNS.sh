@@ -29,6 +29,7 @@ sudo tee "$ZONE_FILE" > /dev/null <<EOF
         86400 ) ; Minimum TTL
 
 @       IN  NS  ns1.${DOMAIN}.
+@       IN  A   ${DNS_IP}
 ns1     IN  A   ${DNS_IP}
 EOF
 
@@ -62,9 +63,7 @@ options {
     memstatistics-file "/var/named/data/named_mem_stats.txt";
     allow-query { localhost; any; }; ### Clients VPN ###
     recursion yes;
-    dnssec-enable yes;
     dnssec-validation yes;
-    dnssec-lookaside auto;
     bindkeys-file "/etc/named.iscdlv.key";
     managed-keys-directory "/var/named/dynamic";
     pid-file "/run/named/named.pid";
