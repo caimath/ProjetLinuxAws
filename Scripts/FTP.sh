@@ -4,8 +4,7 @@
 sudo dnf install -y vsftpd
 
 cat > /etc/vsftpd/vsftpd.conf <<EOF
-
-dirmessage_enable=YES 
+ 
 ftpd_banner=Welcome to the FTP service, no prohibited access allowed.
 
 xferlog_enable=YES
@@ -29,7 +28,7 @@ pasv_max_port=30100
 
 setproctitle_enable=YES
 
-listen_port=22
+listen_port=21
 listen=YES
 listen_ipv6=NO
 
