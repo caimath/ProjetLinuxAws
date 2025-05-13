@@ -17,6 +17,12 @@ sudo bash -c "cat > $VHOST_CONF <<EOF
 </VirtualHost>
 EOF"
 
+# Crée un fichier index.html par défaut
+if [ ! -f "$DOCUMENT_ROOT/index.html" ]; then
+    sudo echo "<h1>Bienvenue sur votre domaine $CLIENT: $DOMAIN </h1>" > $DOCUMENT_ROOT/index.html
+    sudo chown -R apache:apache "$DOCUMENT_ROOT"
+fi
+
 # Activer le site et recharger Apache
 sudo systemctl restart httpd
 echo "Le site $DOMAIN est configuré avec succès."
