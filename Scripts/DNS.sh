@@ -53,33 +53,7 @@ sudo restorecon "$ZONE_FILE" "$REVERSE_ZONE_FILE"
 echo "[*] Nettoyage et mise à jour de named.conf"
 sudo cp "$NAMED_CONF" "${NAMED_CONF}.bak"
 
-sudo awk '
-/^options\s*{/,/^};/ {
-    if (!done) {
-        print "options {"
-        print "    listen-on port 53 { any; };"
-        print "    listen-on-v6 port 53 { ::1; };"
-        print "    directory       \"/var/named\";"
-        print "    dump-file       \"/var/named/data/cache_dump.db\";"
-        print "    statistics-file \"/var/named/data/named_stats.txt\";"
-        print "    memstatistics-file \"/var/named/data/named_mem_stats.txt\";"
-        print "    secroots-file   \"/var/named/data/named.secroots\";"
-        print "    recursing-file  \"/var/named/data/named.recursing\";"
-        print "    allow-query     { any; };"
-        print "    recursion yes;"
-        print "    dnssec-validation yes;"
-        print "    managed-keys-directory \"/var/named/dynamic\";"
-        print "    geoip-directory \"/usr/share/GeoIP\";"
-        print "    pid-file \"/run/named/named.pid\";"
-        print "    session-keyfile \"/run/named/session.key\";"
-        print "    include \"/etc/crypto-policies/back-ends/bind.config\";"
-        print "};"
-        done = 1
-    }
-    next
-}
-{ print }
-' "$NAMED_CONF" | sudo tee "$NAMED_CONF" > /dev/null
+sudo tee -a EOF
 
 if ! grep -q "$DOMAIN" "$NAMED_CONF"; then
   echo "[*] Ajout des zones dans named.conf"
