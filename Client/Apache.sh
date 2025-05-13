@@ -15,7 +15,7 @@ if [[ ! -f "$CERT_FILE" || ! -f "$KEY_FILE" ]]; then
         -newkey rsa:2048 \
         -keyout "$KEY_FILE" \
         -out "$CERT_FILE" \
-        -subj "/C=BE/ST=Hainaut/L=Mons/O=ProjetLinux/OU=Web/CN=$DOMAIN"
+        -subj "/C=BE/ST=Hainaut/L=Mons/O=TungSahurCorp/OU=Web/CN=$DOMAIN"
 else
     echo "[*] Certificat déjà existant pour $DOMAIN, pas de régénération"
 fi

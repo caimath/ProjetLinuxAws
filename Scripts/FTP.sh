@@ -23,7 +23,7 @@ sudo mkdir -p /etc/pki/tls/private /etc/pki/tls/certs
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout /etc/pki/tls/private/vsftpd.key \
   -out /etc/pki/tls/certs/vsftpd.pem \
-  -subj "/C=BE/ST=Hainaut/L=Mons/O=ProjetLinux/CN=ftp.tungtungsahur.lan"
+  -subj "/C=BE/ST=Hainaut/L=Mons/O=TungSahurCorp/CN=ftp.tungtungsahur.lan"
 
 echo "Configuration de vsftpd"
 cat > /etc/vsftpd/vsftpd.conf <<EOF

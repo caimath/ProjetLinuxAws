@@ -9,10 +9,11 @@ Projet linux dans AWS
 * [x] DNS principal
 * [x] DNS client
 * [x] Apache & Apache client
+* [ ] Samba client
 * [x] FTP
 * [x] FTP Client (MDP se crée mal)
 * [x] Certificat SSL/TLS pour FTP
-* [ ] Certificat SSL/TLS pour https
+* [x] Certificat SSL/TLS pour https
 * [ ] MariaDB ou Mysql
 * [ ] Monitoring
 * [ ] NTP

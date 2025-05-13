@@ -10,8 +10,9 @@ sudo dnf install -y \
   mariadb-server mariadb \
   firewalld \
   net-tools \
-  php php-mysqlnd \
+  php php-mysqlnd
 
+# Installer le module SSL pour Apache
 sudo dnf install -y mod_ssl
 
 # Demande interactive du nom du client
@@ -22,16 +23,31 @@ if [[ -z "$CLIENT" ]]; then
   exit 1
 fi
 
-# Demande un mot de passe à l'utilisateur
+# Demande un mot de passe à l'utilisateur pour FTP
 read -s -p "Mot de passe FTP pour $CLIENT : " FTP_PASSWORD
 echo
 read -s -p "Confirmez le mot de passe : " FTP_PASSWORD_CONFIRM
 echo
 
+# Vérification du mot de passe
 if [ "$FTP_PASSWORD" != "$FTP_PASSWORD_CONFIRM" ]; then
     echo "Les mots de passe ne correspondent pas. Abandon."
     exit 1
 fi
+
+# Demande un mot de passe à l'utilisateur pour Samba
+read -s -p "Mot de passe Samba pour $CLIENT : " SAMBA_PASSWORD
+echo
+read -s -p "Confirmez le mot de passe : " SAMBA_PASSWORD_CONFIRM
+echo
+
+
+if [ "$SAMBA_PASSWORD" != "$SAMBA_PASSWORD_CONFIRM" ]; then
+    echo "Les mots de passe ne correspondent pas. Abandon."
+    exit 1
+fi
+
+
 
 # Variables
 DOMAIN="$CLIENT.tungtungsahur.lan"
@@ -47,7 +63,7 @@ sudo chmod +x *.sh
 sudo ./Environnement.sh "$CLIENT" "$DOMAIN" "$FTP_PASSWORD"
 sudo ./Apache.sh "$CLIENT" "$DOMAIN"
 sudo ./FTP.sh "$CLIENT"
-sudo ./Samba.sh "$CLIENT"
+sudo ./Samba.sh "$CLIENT" "$SAMBA_PASSWORD"
 sudo ./DNSClient.sh "$CLIENT"
 
 echo "Configuration terminée pour $CLIENT."
