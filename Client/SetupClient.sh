@@ -10,7 +10,8 @@ sudo dnf install -y \
   mariadb-server mariadb \
   firewalld \
   net-tools \
-  php php-mysqlnd
+  php php-mysqlnd \
+  mod_ssl \
 
 
 # Demande interactive du nom du client
