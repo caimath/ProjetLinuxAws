@@ -25,11 +25,11 @@ Projet linux dans AWS
 
 ## Tuto installation
 
-git clone https://github.com/caimath/ProjetLinuxAws.git
-cd Scripts/
-sudo chmod +x SetupDependances.sh
-sudo ./SetupDependance.sh
+* git clone https://github.com/caimath/ProjetLinuxAws.git
+* cd Scripts/
+* sudo chmod +x SetupDependances.sh
+* sudo ./SetupDependance.sh
 
-cd ../Client
-sudo chmod +x SetupClient.sh
-sudo ./SetupcClient.sh
+* cd ../Client
+* sudo chmod +x SetupClient.sh
+* sudo ./SetupcClient.sh
