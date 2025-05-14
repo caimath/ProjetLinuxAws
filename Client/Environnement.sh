@@ -8,7 +8,7 @@ FTP_USER=$CLIENT
 FTP_PASSWORD=$3
 DB_NAME="$CLIENT_db"
 DB_USER="$CLIENT_user"
-DB_PASS=$(openssl rand -base64 12)
+DB_PASS=$4
 
 # Créer un utilisateur pour le client
 sudo useradd -m -s /bin/bash $CLIENT
@@ -31,10 +31,10 @@ sudo chown $FTP_USER:$FTP_USER $DOCUMENT_ROOT
 
 # Configuration MySQL/MariaDB
 # Créer une base de données MySQL/MariaDB
-sudo mysql -e "CREATE DATABASE $DB_NAME;"
-sudo mysql -e "CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS';"
-sudo mysql -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';"
-sudo mysql -e "FLUSH PRIVILEGES;"
+sudo mysql -u root -p -e "CREATE DATABASE $DB_NAME;"
+sudo mysql -u root -p -e "CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS';"
+sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';"
+sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
 
 # Afficher les informations de configuration
 echo "Utilisateur $CLIENT créé avec succès."

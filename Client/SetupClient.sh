@@ -47,6 +47,18 @@ if [ "$SAMBA_PASSWORD" != "$SAMBA_PASSWORD_CONFIRM" ]; then
     exit 1
 fi
 
+# Demande un mot de passe à l'utilisateur pour Samba
+read -s -p "Mot de passe DB pour $CLIENT : " DB_PASSWORD
+echo
+read -s -p "Confirmez le mot de passe : " DB_PASSWORD_CONFIRM
+echo
+
+
+if [ "$DB_PASSWORD" != "$DB_PASSWORD_CONFIRM" ]; then
+    echo "Les mots de passe ne correspondent pas. Abandon."
+    exit 1
+fi
+
 
 
 # Variables
@@ -60,7 +72,7 @@ sudo chmod +x *.sh
 
 
 # Appel des modules
-sudo ./Environnement.sh "$CLIENT" "$DOMAIN" "$FTP_PASSWORD"
+sudo ./Environnement.sh "$CLIENT" "$DOMAIN" "$FTP_PASSWORD" "$DB_PASSWORD"
 sudo ./FTP.sh "$CLIENT"
 sudo ./Samba.sh "$CLIENT" "$SAMBA_PASSWORD"
 sudo ./Apache.sh "$CLIENT" "$DOMAIN"

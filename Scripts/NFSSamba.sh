@@ -34,10 +34,10 @@ if ! grep -q "map to guest = Bad User" "$SAMBA_CONF"; then
     sudo sed -i '/\[global\]/a map to guest = Bad User' "$SAMBA_CONF"
 fi
 
-if ! grep -q "\[Share\]" "$SAMBA_CONF"; then
+if ! grep -q "\[share\]" "$SAMBA_CONF"; then
     o tee -a "$SAMBA_CONF" > /dev/null <<EOF
 
-[Share]
+[share]
      path = $NFS_SHARE_DIR
      browseable = yes
      writable = no

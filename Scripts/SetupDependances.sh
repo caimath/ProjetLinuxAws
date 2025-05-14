@@ -9,10 +9,10 @@ sudo dnf install -y \
   vsftpd \
   samba samba-client samba-common \
   nfs-utils \
-  mariadb105-server \
   firewalld \
-  net-tools \
-  php php-mysqlnd
+  net-tools 
+
+
 
 
 # Démarrer et activer les services
@@ -33,6 +33,8 @@ sudo firewall-cmd --permanent --add-port=30000-30100/tcp
 sudo firewall-cmd --permanent --add-service=samba
 sudo firewall-cmd --permanent --add-service=nfs
 sudo firewall-cmd --permanent --add-service=mysql
+sudo firewall-cmd --permanent --add-service=phpmyadmin
+sudo firewall-cmd --permanent --add-service=php
 sudo firewall-cmd --reload
 
 # Rendre les scripts exécutables
@@ -46,5 +48,6 @@ sudo ./DNS.sh
 # sudo ./Fail2Ban.sh
 sudo ./FTP.sh
 sudo ./NFSSamba.sh
+sudo ./DB.sh
 
 echo "Configuration terminée."
