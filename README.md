@@ -15,8 +15,8 @@ Projet linux dans AWS
 * [x] Certificat SSL/TLS pour FTP
 * [x] Certificat SSL/TLS pour https
 * [ ] MariaDB ou Mysql
-* [ ] Monitoring
-* [ ] NTP
+* [ ] Monitoring -> à verif serv final
+* [ ] NTP -> à vérif serv final
 * [ ] Plan de sauvegarde
 * [ ] FW
 * [ ] SELinux
