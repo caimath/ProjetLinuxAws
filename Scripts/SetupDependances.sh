@@ -61,7 +61,7 @@ sudo ./Fail2Ban.sh
 sudo ./FTP.sh
 sudo ./NFSSamba.sh
 sudo ./SSLDomain.sh
-sudo ./MySqlSecure.sh
+sudo ./MySqlSecure.sh"
 sudo ./DB.sh
 
 echo "Configuration terminée."
