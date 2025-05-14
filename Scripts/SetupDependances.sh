@@ -33,8 +33,6 @@ sudo firewall-cmd --permanent --add-port=30000-30100/tcp
 sudo firewall-cmd --permanent --add-service=samba
 sudo firewall-cmd --permanent --add-service=nfs
 sudo firewall-cmd --permanent --add-service=mysql
-sudo firewall-cmd --permanent --add-service=phpmyadmin
-sudo firewall-cmd --permanent --add-service=php
 sudo firewall-cmd --reload
 
 # Rendre les scripts exécutables
