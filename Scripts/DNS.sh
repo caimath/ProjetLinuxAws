@@ -56,7 +56,7 @@ sudo cp "$NAMED_CONF" "${NAMED_CONF}.bak"
 
 sudo cat <<EOF > "$NAMED_CONF"
 options {
-    listen-on port 53 { 127.0.0.1; 10.42.0.29; }; ### DNS principal ###
+    listen-on port 53 { 127.0.0.1; $DNS_IP; }; ### DNS principal ###
     directory     "/var/named";
     dump-file     "/var/named/data/cache_dump.db";
     statistics-file "/var/named/data/named_stats.txt";

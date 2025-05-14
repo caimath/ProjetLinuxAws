@@ -12,6 +12,7 @@ sudo dnf install -y \
   firewalld \
   net-tools 
 
+sudo dnf install -y MariaDB-server galera-4 MariaDB-client MariaDB-shared MariaDB-backup MariaDB-common
 
 
 
@@ -41,13 +42,13 @@ sudo chmod +x ./*.sh
 
 
 # Appeler les modules
-sudo ./DNS.sh
-sudo ./SSH.sh
-sudo ./Fail2Ban.sh
-sudo ./FTP.sh
-sudo ./NFSSamba.sh
-sudo ./SSLDomain.sh
-sudo ./DB.sh
-sudo ./MySqlSecure.sh
+sudo ./Scripts/DNS.sh
+sudo ./Scripts/SSH.sh
+sudo ./Scripts/Fail2Ban.sh
+sudo ./Scripts/FTP.sh
+sudo ./Scripts/NFSSamba.sh
+sudo ./Scripts/SSLDomain.sh
+sudo ./Scripts/DB.sh
+sudo ./Scripts/MySqlSecure.sh
 
 echo "Configuration terminée."

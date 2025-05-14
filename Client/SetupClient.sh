@@ -71,10 +71,10 @@ sudo chmod +x *.sh
 
 
 # Appel des modules
-sudo ./Environnement.sh "$CLIENT" "$DOMAIN" "$FTP_PASSWORD" "$DB_PASSWORD"
-sudo ./FTP.sh "$CLIENT"
-sudo ./Samba.sh "$CLIENT" "$SAMBA_PASSWORD"
-sudo ./Apache.sh "$CLIENT" "$DOMAIN"
-sudo ./DNSClient.sh "$CLIENT"
+sudo ./Client/Environnement.sh "$CLIENT" "$DOMAIN" "$FTP_PASSWORD" "$DB_PASSWORD"
+sudo ./Client/FTP.sh "$CLIENT"
+sudo ./Client/Samba.sh "$CLIENT" "$SAMBA_PASSWORD"
+sudo ./Client/Apache.sh "$CLIENT" "$DOMAIN"
+sudo ./Client/DNSClient.sh "$CLIENT"
 
 echo "Configuration terminée pour $CLIENT."
