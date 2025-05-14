@@ -5,21 +5,13 @@
 echo "[INFO] Lancement de l'installation complète des services..."
 
 # Partie serveur
+echo "[INFO] Installation des dépendances et configuration des services..."
+sudo chmod +x ./Scripts/*.sh
 ./Scripts/SetupDependances.sh
-./Scripts/NFSSamba.sh
-./Scripts/DNS.sh
-./Scripts/FTP.sh
-./Scripts/DB.sh
-./Scripts/MySqlSecure.sh
-./Scripts/SSH.sh
-./Scripts/Fail2Ban.sh
 
 # Partie client
-./Client/Environnement.sh
-./Client/DNSClient.sh
-./Client/Apache.sh
-./Client/Samba.sh
-./Client/FTP.sh
+echo "[INFO] Configuration du client..."
+sudo chmod +x ./Client/*.sh
 ./Client/SetupClient.sh
 
 echo "[INFO] Installation complète terminée."

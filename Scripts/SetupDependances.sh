@@ -42,7 +42,7 @@ sudo chmod +x ./*.sh
 
 # Appeler les modules
 sudo ./DNS.sh
-# sudo ./SSH.sh
+sudo ./SSH.sh
 sudo ./Fail2Ban.sh
 sudo ./FTP.sh
 sudo ./NFSSamba.sh
