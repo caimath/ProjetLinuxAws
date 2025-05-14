@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Varialbles
+$IP_ADMIN="10.42.0.149"
+
 echo "Installing Fail2Ban..."
 
 # Check if Fail2Ban is already installed
@@ -43,10 +46,10 @@ EOF
 
 # Add IPs to whitelist
 # Whitelist IP admin SSH
-echo "ignoreip = 192.168.42.2" | sudo tee -a /etc/fail2ban/jail.d/sshd.local > /dev/null
+echo "ignoreip = $IP_ADMIN" | sudo tee -a /etc/fail2ban/jail.d/sshd.local > /dev/null
 
 # Whitelist IP admin FTP
-echo "ignoreip = 192.168.1.101" | sudo tee -a /etc/fail2ban/jail.d/vsftpd.local > /dev/null
+echo "ignoreip = $IP_ADMIN" | sudo tee -a /etc/fail2ban/jail.d/vsftpd.local > /dev/null
 
 
 # Restart Fail2Ban to apply the changes

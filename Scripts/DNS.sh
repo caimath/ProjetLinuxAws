@@ -4,7 +4,7 @@ set -euo pipefail
 # ---------------------- CONFIGURATION ----------------------
 DOMAIN="tungtungsahur.lan"
 REVERSE_ZONE="0.42.10.in-addr.arpa"
-DNS_IP="10.42.0.29"
+DNS_IP="10.42.0.149"
 
 ZONE_FILE="/var/named/${DOMAIN}.zone"
 REVERSE_ZONE_FILE="/var/named/0.42.10.rev"
