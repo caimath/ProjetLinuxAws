@@ -51,8 +51,11 @@ EOF"
 # Crée un fichier index.html par défaut
 if [ ! -f "$DOCUMENT_ROOT/index.html" ]; then
     echo "<h1>Bienvenue sur votre domaine $CLIENT: $DOMAIN </h1>" | sudo tee "$DOCUMENT_ROOT/index.html" > /dev/null
-    sudo chown -R apache:apache "$DOCUMENT_ROOT"
 fi
+
+sudo usermod -aG $CLIENT apache
+sudo chmod 750 /var/www/$CLIENT
+
 
 # Redémarrer Apache
 sudo systemctl restart httpd
