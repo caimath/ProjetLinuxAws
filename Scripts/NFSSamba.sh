@@ -35,7 +35,7 @@ if ! grep -q "map to guest = Bad User" "$SAMBA_CONF"; then
 fi
 
 if ! grep -q "\[share\]" "$SAMBA_CONF"; then
-    o tee -a "$SAMBA_CONF" > /dev/null <<EOF
+    tee -a "$SAMBA_CONF" > /dev/null <<EOF
 
 [share]
      path = $NFS_SHARE_DIR

@@ -30,6 +30,7 @@ logpath = %(sshd_log)s
 maxretry = 3
 bantime = 600
 findtime = 600
+ignoreip = $IP_ADMIN
 EOF
 
 # Configure Fail2Ban to protect the FTP service
@@ -42,15 +43,12 @@ logpath = /var/log/vsftpd.log
 maxretry = 3
 bantime = 600
 findtime = 600
+ignoreip = $IP_ADMIN
 EOF
 
-# Add IPs to whitelist
-# Whitelist IP admin SSH
-echo "ignoreip = $IP_ADMIN" | sudo tee -a /etc/fail2ban/jail.d/sshd.local > /dev/null
-
-# Whitelist IP admin FTP
-echo "ignoreip = $IP_ADMIN" | sudo tee -a /etc/fail2ban/jail.d/vsftpd.local > /dev/null
-
+# Demarrer et activer le service Fail2Ban
+sudo systemctl start fail2ban
+sudo systemctl enable fail2ban
 
 # Restart Fail2Ban to apply the changes
 sudo systemctl restart fail2ban || { echo "Failed to restart Fail2Ban. Exiting."; exit 1; }
