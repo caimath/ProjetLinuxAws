@@ -44,7 +44,7 @@ sudo tee "$REVERSE_ZONE_FILE" > /dev/null <<EOF
         86400 ) ; Minimum TTL
 
 @       IN  NS  ns1.${DOMAIN}.
-29      IN  PTR ns1.${DOMAIN}.
+149      IN  PTR ns1.${DOMAIN}.
 EOF
 
 echo "[*] Droits SELinux + permissions"

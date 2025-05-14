@@ -63,5 +63,6 @@ sudo ./NFSSamba.sh
 sudo ./SSLDomain.sh
 sudo ./MySqlSecure.sh
 sudo ./DB.sh
+sudo ./NTP.sh
 
 echo "Configuration terminée."
