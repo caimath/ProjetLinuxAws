@@ -17,9 +17,9 @@ Projet linux dans AWS
 * [x] MariaDB
 * [x] MySqlSecure -> à vérif
 * [ ] Monitoring -> à verif serv final
-* [ ] NTP -> à vérif serv final
+* [x] NTP -> à vérif serv final
 * [ ] Plan de sauvegarde
-* [ ] FW
+* [x] FW -> on va dire
 * [ ] **SELinux**
 * [ ] Antivirus
 * [ ] LVM

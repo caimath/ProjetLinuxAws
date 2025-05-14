@@ -24,12 +24,4 @@ EOF
 # Redémarrer le service chronyd
 sudo systemctl restart chronyd
 
-# Ouvrir le port NTP si firewalld est actif
-if systemctl is-active --quiet firewalld; then
-  sudo firewall-cmd --permanent --add-service=ntp
-  sudo firewall-cmd --reload
-else
-  echo "Firewalld non actif. Vérifie l'ouverture du port UDP 123 si nécessaire."
-fi
-
 echo "Configuration du serveur NTP terminée. Vérifie avec : chronyc tracking"

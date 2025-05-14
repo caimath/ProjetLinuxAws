@@ -36,16 +36,6 @@ sudo systemctl enable --now nfs-server
 sudo systemctl enable --now mariadb
 sudo systemctl enable --now firewalld
 
-sudo firewall-cmd --permanent --add-service=dns
-sudo firewall-cmd --permanent --add-service=ssh
-sudo firewall-cmd --permanent --add-service=http
-sudo firewall-cmd --permanent --add-service=https
-sudo firewall-cmd --permanent --add-service=ftp
-sudo firewall-cmd --permanent --add-port=30000-30100/tcp
-sudo firewall-cmd --permanent --add-service=samba
-sudo firewall-cmd --permanent --add-service=nfs
-sudo firewall-cmd --permanent --add-service=mysql
-sudo firewall-cmd --reload
 
 sudo systemctl start mariadb
 
@@ -55,6 +45,7 @@ sudo chmod +x ./*.sh
 
 
 # Appeler les modules
+sudo ./Firewall.sh
 sudo ./DNS.sh
 sudo ./SSH.sh
 sudo ./Fail2Ban.sh
@@ -64,5 +55,6 @@ sudo ./SSLDomain.sh
 sudo ./MySqlSecure.sh
 sudo ./DB.sh
 sudo ./NTP.sh
+sudo ./SELinux.sh
 
 echo "Configuration terminée."
