@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Varialbles
-$IP_ADMIN="10.42.0.149"
+IP_ADMIN="10.42.0.149"
 
 echo "Installing Fail2Ban..."
 
