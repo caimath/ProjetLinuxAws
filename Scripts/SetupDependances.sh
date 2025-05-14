@@ -47,5 +47,6 @@ sudo ./DNS.sh
 sudo ./FTP.sh
 sudo ./NFSSamba.sh
 sudo ./DB.sh
+# sudo ./MySqlSecure.sh
 
 echo "Configuration terminée."
