@@ -12,9 +12,7 @@ else
     echo "Fail2Ban is already installed."
 fi
 
-# Enable and start the Fail2Ban service
-sudo systemctl enable fail2ban || { echo "Failed to enable Fail2Ban. Exiting."; exit 1; }
-sudo systemctl start fail2ban || { echo "Failed to start Fail2Ban. Exiting."; exit 1; }
+
 
 # Create the configuration directory if necessary
 sudo mkdir -p /etc/fail2ban/jail.d
@@ -46,9 +44,9 @@ findtime = 600
 ignoreip = $IP_ADMIN
 EOF
 
-# Demarrer et activer le service Fail2Ban
-sudo systemctl start fail2ban
-sudo systemctl enable fail2ban
+# Enable and start the Fail2Ban service
+sudo systemctl enable fail2ban || { echo "Failed to enable Fail2Ban. Exiting."; exit 1; }
+sudo systemctl start fail2ban || { echo "Failed to start Fail2Ban. Exiting."; exit 1; }
 
 # Restart Fail2Ban to apply the changes
 sudo systemctl restart fail2ban || { echo "Failed to restart Fail2Ban. Exiting."; exit 1; }

@@ -12,7 +12,17 @@ sudo dnf install -y \
   firewalld \
   net-tools 
 
-sudo yum install -y mariadb-server mariadb
+# Installer mariadb
+sudo tee /etc/yum.repos.d/MariaDB.repo > /dev/null <<EOF
+[mariadb]
+name = MariaDB
+baseurl = https://yum.mariadb.org/10.6/rhel9-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+EOF
+
+sudo dnf install -y MariaDB-server MariaDB-client
+
 
 
 
@@ -21,6 +31,7 @@ sudo systemctl enable --now named
 sudo systemctl enable --now httpd
 sudo systemctl enable --now vsftpd
 sudo systemctl enable --now smb
+sudo systemctl enable --now fail2ban
 sudo systemctl enable --now nfs-server
 sudo systemctl enable --now mariadb
 sudo systemctl enable --now firewalld
@@ -35,6 +46,8 @@ sudo firewall-cmd --permanent --add-service=samba
 sudo firewall-cmd --permanent --add-service=nfs
 sudo firewall-cmd --permanent --add-service=mysql
 sudo firewall-cmd --reload
+
+sudo systemctl start mariadb
 
 # Rendre les scripts exécutables
 sudo chmod +x *.sh
