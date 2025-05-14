@@ -17,6 +17,7 @@ sudo systemctl start fail2ban || { echo "Failed to start Fail2Ban. Exiting."; ex
 sudo mkdir -p /etc/fail2ban/jail.d
 
 # Configure Fail2Ban to protect the SSH service
+# Configure Fail2Ban to protect the SSH service
 cat <<EOF | sudo tee /etc/fail2ban/jail.d/sshd.local > /dev/null
 [sshd]
 enabled = true
@@ -27,6 +28,26 @@ maxretry = 3
 bantime = 600
 findtime = 600
 EOF
+
+# Configure Fail2Ban to protect the FTP service
+cat <<EOF | sudo tee /etc/fail2ban/jail.d/vsftpd.local > /dev/null
+[vsftpd]
+enabled = true
+port = 21
+action = %(action_mwl)s
+logpath = /var/log/vsftpd.log
+maxretry = 3
+bantime = 600
+findtime = 600
+EOF
+
+# Add IPs to whitelist
+# Whitelist IP admin SSH
+echo "ignoreip = 192.168.42.2" | sudo tee -a /etc/fail2ban/jail.d/sshd.local > /dev/null
+
+# Whitelist IP admin FTP
+echo "ignoreip = 192.168.1.101" | sudo tee -a /etc/fail2ban/jail.d/vsftpd.local > /dev/null
+
 
 # Restart Fail2Ban to apply the changes
 sudo systemctl restart fail2ban || { echo "Failed to restart Fail2Ban. Exiting."; exit 1; }
