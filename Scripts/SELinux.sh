@@ -38,18 +38,18 @@ fi
 
 # Apache - contenu dans /var/www
 echo "[+] Contexte SELinux pour Apache (/var/www)"
-semanage fcontext -m -t httpd_sys_content_t "/var/www(/.*)?"
-semanage fcontext -m -t httpd_sys_rw_content_t "/var/www/tungtungsahur.lan/phpMyAdmin(/.*)?"
+semanage fcontext -a -t httpd_sys_content_t "/var/www(/.*)?"
+semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/tungtungsahur.lan/phpMyAdmin(/.*)?"
 restorecon -Rv /var/www
 
 # FTP et Samba - contenu dans /var/www/$client
 echo "[+] Contexte SELinux pour FTP/Samba (/var/www/<client>)"
-semanage fcontext -m -t public_content_rw_t "/var/www/[^/]+(/.*)?"
+semanage fcontext -a -t public_content_rw_t "/var/www/[^/]+(/.*)?"
 restorecon -Rv /var/www
 
 # Samba et NFS - /srv/nfs/share
 echo "[+] Contexte SELinux pour NFS (/srv/nfs/share)"
-semanage fcontext -m -t public_content_rw_t "/srv/nfs/share(/.*)?"
+semanage fcontext -a -t public_content_rw_t "/srv/nfs/share(/.*)?"
 restorecon -Rv /srv/nfs/share
 
 # DNS - BIND
