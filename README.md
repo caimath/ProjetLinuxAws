@@ -19,6 +19,6 @@ Projet linux dans AWS
 * [ ] NTP -> à vérif serv final
 * [ ] Plan de sauvegarde
 * [ ] FW
-* [ ] SELinux
+* [ ] **SELinux**
 * [ ] Antivirus
 * [ ] LVM
