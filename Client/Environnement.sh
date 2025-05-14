@@ -31,10 +31,13 @@ sudo chown $FTP_USER:$FTP_USER $DOCUMENT_ROOT
 
 # Configuration MySQL/MariaDB
 # Créer une base de données MySQL/MariaDB
-sudo mysql -u root -p -e "CREATE DATABASE $DB_NAME;"
-sudo mysql -u root -p -e "CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS';"
-sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';"
-sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
+# Créer la base de données et l'utilisateur
+sudo mysql <<EOF
+CREATE DATABASE IF NOT EXISTS \`$DB_NAME\`;
+CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';
+GRANT ALL PRIVILEGES ON \`$DB_NAME\`.* TO '$DB_USER'@'%';
+FLUSH PRIVILEGES;
+EOF
 
 # Afficher les informations de configuration
 echo "Utilisateur $CLIENT créé avec succès."
