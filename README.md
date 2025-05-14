@@ -14,7 +14,8 @@ Projet linux dans AWS
 * [x] FTP Client (MDP se crée mal)
 * [x] Certificat SSL/TLS pour FTP
 * [x] Certificat SSL/TLS pour https
-* [ ] MariaDB
+* [x] MariaDB
+* [x] MySqlSecure -> à vérif
 * [ ] Monitoring -> à verif serv final
 * [ ] NTP -> à vérif serv final
 * [ ] Plan de sauvegarde
