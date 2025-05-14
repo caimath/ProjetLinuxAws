@@ -22,3 +22,14 @@ Projet linux dans AWS
 * [ ] **SELinux**
 * [ ] Antivirus
 * [ ] LVM
+
+## Tuto installation
+
+git clone https://github.com/caimath/ProjetLinuxAws.git
+cd Scripts/
+sudo chmod +x SetupDependances.sh
+sudo ./SetupDependance.sh
+
+cd ../Client
+sudo chmod +x SetupClient.sh
+sudo ./SetupcClient.sh
