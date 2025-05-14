@@ -6,8 +6,8 @@ DOMAIN=$2
 DOCUMENT_ROOT="/var/www/$CLIENT"
 FTP_USER=$CLIENT
 FTP_PASSWORD=$3
-DB_NAME="$CLIENT_db"
-DB_USER="$CLIENT_user"
+DB_NAME="$CLIENT.db"
+DB_USER="$CLIENT"
 DB_PASS=$4
 
 # Créer un utilisateur pour le client
