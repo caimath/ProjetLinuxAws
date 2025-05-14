@@ -7,14 +7,14 @@ DOWNLOAD_URL="https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languag
 
 # Installation des dépendances si besoin
 echo "[*] Installation de wget et tar"
-sudo dnf install -y wget tar
+sudo dnf install -y wget tar > /dev/null 2>&1
 
 # Aller dans le dossier /var/www/html
 cd /var/www/html
 
 # Télécharger phpMyAdmin
 echo "[*] Téléchargement de phpMyAdmin"
-sudo wget "$DOWNLOAD_URL" -O "$TARBALL"
+sudo wget "$DOWNLOAD_URL" -O "$TARBALL" > /dev/null 2>&1
 
 # Créer le dossier de destination
 echo "[*] Création du dossier $INSTALL_DIR"
@@ -22,7 +22,7 @@ sudo mkdir -p "$INSTALL_DIR"
 
 # Extraire le contenu
 echo "[*] Extraction de l'archive"
-sudo tar -xvzf "$TARBALL" -C "$INSTALL_DIR" --strip-components=1
+sudo tar -xvzf "$TARBALL" -C "$INSTALL_DIR" --strip-components=1 > /dev/null 2>&1
 
 # Supprimer l'archive
 echo "[*] Suppression de l'archive $TARBALL"
