@@ -7,7 +7,6 @@ sudo dnf install -y \
   vsftpd \
   samba samba-client samba-common \
   nfs-utils \
-  mariadb-server mariadb \
   firewalld \
   net-tools \
   php php-mysqlnd
