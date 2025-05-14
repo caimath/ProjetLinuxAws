@@ -4,14 +4,14 @@ Projet linux dans AWS
 
 ## Serveur à faire
 
-* [ ] SSH & Fail2ban -> à vérif
-* [x] Samba & NFS global sans authentification
+* [x] SSH & Fail2ban
+* [x] Samba & NFS global sans authentification -> Non
 * [x] DNS principal
 * [x] DNS client
 * [x] Apache & Apache client
 * [x] Samba client
 * [x] FTP
-* [x] FTP Client (MDP se crée mal)
+* [x] FTP Client
 * [x] Certificat SSL/TLS pour FTP
 * [x] Certificat SSL/TLS pour https
 * [x] MariaDB
