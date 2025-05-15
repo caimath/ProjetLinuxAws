@@ -2,7 +2,9 @@
 
 # Création du dossier racine
 
-echo '<VirtualHost *:80>
+cat > /etc/httpd/conf.d/00-default.conf <<EOF
+ 
+<VirtualHost *:80>
     ServerName tungtungsahur.lan
     DocumentRoot /var/www/tungtungsahur.lan
     Redirect permanent / https://tungtungsahur.lan/
@@ -20,6 +22,7 @@ echo '<VirtualHost *:80>
         AllowOverride All
         Require all granted
     </Directory>
-</VirtualHost>' | sudo tee /etc/httpd/conf.d/00-default.conf
+</VirtualHost>
+EOF
 
 sudo systemctl restart httpd
