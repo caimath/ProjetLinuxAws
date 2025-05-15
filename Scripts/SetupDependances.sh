@@ -43,7 +43,7 @@ sudo ./SSLDomain.sh
 sudo ./MySqlSecure.sh
 sudo ./DB.sh
 sudo ./NTP.sh
-sudo ./SELinux.sh
+# sudo ./SELinux.sh
 sudo ./NetData.sh
 sudo ./Firewall.sh
 sudo ./AV.sh
@@ -61,6 +61,6 @@ sudo systemctl enable --now firewalld
 
 sudo systemctl start fail2ban
 
-sudo setenforce 0
+# sudo setenforce 0
 
 echo "Configuration terminée."
