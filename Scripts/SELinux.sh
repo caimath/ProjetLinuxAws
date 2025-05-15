@@ -31,9 +31,14 @@ sudo setsebool -P httpd_can_network_connect_db 1
 # Autorise aussi les connexions réseaux génériques si besoin
 sudo setsebool -P httpd_can_network_connect 1
 
+sudo systemctl restart httpd
 
-sudo ausearch -m AVC -ts recent | audit2allow -M my_phpmyadmin
-sudo semodule -i my_phpmyadmin.pp
+if sudo ausearch -m AVC -ts recent | audit2allow -M my_phpmyadmin; then
+    sudo semodule -i my_phpmyadmin.pp
+else
+    echo "Aucune alerte SELinux détectée récemment, pas de module généré."
+fi
+
 
 
 sudo systemctl restart httpd
