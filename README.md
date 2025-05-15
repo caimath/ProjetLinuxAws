@@ -20,8 +20,8 @@ Projet linux dans AWS
 * [x] NTP -> à vérif serv final
 * [ ] Plan de sauvegarde
 * [x] FW -> on va dire
-* [x] SELinux
-* [ ] Antivirus
+* [] SELinux -> Fonctionne pas
+* [x] Antivirus
 * [ ] LVM
 
 ## Tuto installation
