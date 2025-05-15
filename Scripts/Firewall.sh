@@ -15,5 +15,6 @@ sudo firewall-cmd --permanent --add-service=samba
 sudo firewall-cmd --permanent --add-service=nfs
 sudo firewall-cmd --permanent --add-service=mysql
 sudo firewall-cmd --permanent --add-service=ntp
+sudo firewall-cmd --permanent --add-port=19999/tcp
 sudo firewall-cmd --reload
 

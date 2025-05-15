@@ -57,5 +57,6 @@ sudo ./MySqlSecure.sh
 sudo ./DB.sh
 sudo ./NTP.sh
 sudo ./SELinux.sh
+sudo ./NetData.sh
 
 echo "Configuration terminée."
