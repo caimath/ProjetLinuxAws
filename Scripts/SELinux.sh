@@ -23,5 +23,16 @@ else
     echo "SELinux est déjà actif en mode enforcing."
 fi
 
+# Autoriser apache à accéder à phpmyadmin
+
+# Autorise Apache à se connecter à MariaDB (phpMyAdmin, WordPress, etc.)
+sudo setsebool -P httpd_can_network_connect_db 1
+
+# Autorise aussi les connexions réseaux génériques si besoin
+sudo setsebool -P httpd_can_network_connect 1
+
+sudo systemctl restart httpd
+
+
 # Affiche le statut final
 echo "Statut final de SELinux : $(getenforce)"
