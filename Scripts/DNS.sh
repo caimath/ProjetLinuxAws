@@ -68,6 +68,11 @@ options {
     managed-keys-directory "/var/named/dynamic";
     pid-file "/run/named/named.pid";
     session-keyfile "/run/named/session.key";
+
+    forwarders {
+        1.1.1.1;
+        8.8.8.8;
+    };
 };
 
 forwarders {
