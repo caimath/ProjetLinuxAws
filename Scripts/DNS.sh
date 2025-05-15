@@ -70,6 +70,11 @@ options {
     session-keyfile "/run/named/session.key";
 };
 
+forwarders {
+        1.1.1.1;
+        8.8.8.8;
+    };
+
 logging {
     channel default_debug {
         file "data/named.run";
