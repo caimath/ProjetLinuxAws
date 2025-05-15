@@ -9,12 +9,12 @@ echo "[INFO] Installation des dépendances et configuration des services..."
 sudo chmod +x ./Scripts/*.sh
 
 cd ./Scripts
-SetupDependances.sh
+sudo ./SetupDependances.sh
 
 # Partie client
 echo "[INFO] Configuration du client..."
 cd ../Client
-sudo chmod +x ./Client/*.sh
-./Client/SetupClient.sh
+sudo chmod +x ./*.sh
+sudo ./SetupClient.sh
 
 echo "[INFO] Installation complète terminée."
