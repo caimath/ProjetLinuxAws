@@ -5,7 +5,7 @@ sudo dnf install -y bind bind-utils
 CLIENT=$1
 DOMAIN="tungtungsahur.lan"
 ZONE_FILE="/var/named/${DOMAIN}.zone"
-DNS_IP="10.42.0.149"
+DNS_IP="10.42.0.34"
 
 if [[ -z "$CLIENT" ]]; then
   echo "Usage: $0 <nom_du_client>"

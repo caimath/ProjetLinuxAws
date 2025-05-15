@@ -4,7 +4,7 @@ set -euo pipefail
 # ---------------------- CONFIGURATION ----------------------
 DOMAIN="tungtungsahur.lan"
 REVERSE_ZONE="0.42.10.in-addr.arpa"
-DNS_IP="10.42.0.149"
+DNS_IP="10.42.0.34"
 
 ZONE_FILE="/var/named/${DOMAIN}.zone"
 REVERSE_ZONE_FILE="/var/named/0.42.10.rev"
@@ -44,7 +44,7 @@ sudo tee "$REVERSE_ZONE_FILE" > /dev/null <<EOF
         86400 ) ; Minimum TTL
 
 @       IN  NS  ns1.${DOMAIN}.
-149      IN  PTR ns1.${DOMAIN}.
+34      IN  PTR ns1.${DOMAIN}.
 EOF
 
 echo "[*] Droits SELinux + permissions"
