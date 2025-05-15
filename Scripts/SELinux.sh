@@ -36,12 +36,6 @@ if ! command -v semanage &> /dev/null; then
   sudo dnf install -y policycoreutils-python-utils
 fi
 
-# Apache - contenu dans /var/www
-echo "[+] Contexte SELinux pour Apache (/var/www)"
-semanage fcontext -a -t httpd_sys_content_t "/var/www(/.*)?"
-semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/tungtungsahur.lan/phpMyAdmin(/.*)?"
-restorecon -Rv /var/www
-
 # FTP et Samba - contenu dans /var/www/$client
 echo "[+] Contexte SELinux pour FTP/Samba (/var/www/<client>)"
 semanage fcontext -a -t public_content_rw_t "/var/www/[^/]+(/.*)?"
@@ -52,14 +46,8 @@ echo "[+] Contexte SELinux pour NFS (/srv/nfs/share)"
 semanage fcontext -a -t public_content_rw_t "/srv/nfs/share(/.*)?"
 restorecon -Rv /srv/nfs/share
 
-# DNS - BIND
-echo "[+] Contexte SELinux pour BIND (/var/named)"
-restorecon -Rv /var/named
-
 # Booléens SELinux nécessaires
 echo "[+] Activation des booléens SELinux nécessaires"
-setsebool -P httpd_can_network_connect 1
-setsebool -P httpd_execmem 1
 setsebool -P allow_ftpd_full_access 1
 setsebool -P samba_enable_home_dirs 1
 
