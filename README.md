@@ -5,7 +5,7 @@ Projet linux dans AWS
 ## Serveur à faire
 
 * [x] SSH & Fail2ban
-* [x] Samba & NFS global sans authentification -> Non
+* [x] Samba & NFS global sans authentification
 * [x] DNS principal
 * [x] DNS client
 * [x] Apache & Apache client
@@ -15,16 +15,18 @@ Projet linux dans AWS
 * [x] Certificat SSL/TLS pour FTP
 * [x] Certificat SSL/TLS pour https
 * [x] MariaDB
-* [x] MySqlSecure -> à vérif
-* [ ] Monitoring -> à verif serv final
+* [x] MySqlSecure
+* [x] Monitoring
 * [x] NTP -> à vérif serv final
 * [ ] Plan de sauvegarde
 * [x] FW -> on va dire
-* [ ] **SELinux**
+* [ ] **SELinux** -> Fonctionne pas
 * [ ] Antivirus
 * [ ] LVM
 
 ## Tuto installation
+
+### Serveur Linux
 
 * git clone https://github.com/caimath/ProjetLinuxAws.git
 * cd Scripts/
@@ -34,3 +36,7 @@ Projet linux dans AWS
 * cd ../Client
 * sudo chmod +x SetupClient.sh
 * sudo ./SetupcClient.sh
+
+### Client Windows
+
+* Changer DNS dans ncpa.cpl pour carte réseau openVPN

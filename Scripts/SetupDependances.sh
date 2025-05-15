@@ -24,19 +24,6 @@ EOF
 sudo dnf install -y MariaDB-server MariaDB-client
 
 
-
-
-# Démarrer et activer les services
-sudo systemctl enable --now named
-sudo systemctl enable --now httpd
-sudo systemctl enable --now vsftpd
-sudo systemctl enable --now smb
-sudo systemctl enable --now fail2ban
-sudo systemctl enable --now nfs-server
-sudo systemctl enable --now mariadb
-sudo systemctl enable --now firewalld
-
-
 sudo systemctl start mariadb
 
 # Rendre les scripts exécutables
@@ -45,7 +32,7 @@ sudo chmod +x ./*.sh
 
 
 # Appeler les modules
-sudo ./Firewall.sh
+
 sudo ./DNS.sh
 sudo ./ApacheDefault.sh
 sudo ./SSH.sh
@@ -58,5 +45,17 @@ sudo ./DB.sh
 sudo ./NTP.sh
 sudo ./SELinux.sh
 sudo ./NetData.sh
+sudo ./Firewall.sh
+
+
+# Démarrer et activer les services
+sudo systemctl enable --now named
+sudo systemctl enable --now httpd
+sudo systemctl enable --now vsftpd
+sudo systemctl enable --now smb
+sudo systemctl enable --now fail2ban
+sudo systemctl enable --now nfs-server
+sudo systemctl enable --now mariadb
+sudo systemctl enable --now firewalld
 
 echo "Configuration terminée."
