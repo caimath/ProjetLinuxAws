@@ -33,13 +33,15 @@ echo "Log prêt : /var/log/clamav/scan.log"
 
 # Premier scan de test
 echo "Scan initial sur /var/www et /etc"
-sudo clamdscan --log=/var/log/clamav/scan.log /var/www /etc
+sudo clamscan --log=/var/log/clamav/scan.log /var/www /etc
 echo "Scan initial terminé"
 
 # Configurer un cron pour scanner automatiquement chaque nuit
 CRON_FILE="/etc/cron.d/clamav-scan"
+
+sudo mkdir -p /etc/cron.d
 sudo tee "$CRON_FILE" > /dev/null <<EOF
-0 3 * * * root clamdscan --log=/var/log/clamav/scan.log /var/www /etc
+0 3 * * * root clamscan --log=/var/log/clamav/scan.log /var/www /etc
 EOF
 
 echo " Scan automatique programmé chaque nuit à 3h"
