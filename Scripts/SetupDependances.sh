@@ -46,6 +46,7 @@ sudo ./NTP.sh
 sudo ./SELinux.sh
 sudo ./NetData.sh
 sudo ./Firewall.sh
+sudo ./AV.sh
 
 
 # Démarrer et activer les services
