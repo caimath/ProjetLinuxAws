@@ -47,6 +47,7 @@ sudo chmod +x ./*.sh
 # Appeler les modules
 sudo ./Firewall.sh
 sudo ./DNS.sh
+sudo ./ApacheDefault.sh
 sudo ./SSH.sh
 sudo ./Fail2Ban.sh
 sudo ./FTP.sh

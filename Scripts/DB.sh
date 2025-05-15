@@ -27,6 +27,7 @@ sudo rm -f "$TARBALL"
 
 echo "[*] Attribution des droits à apache"
 sudo chown -R apache:apache "$INSTALL_DIR"
+sudo chmod -R 755 /var/www/tungtungsahur.lan/phpMyAdmin
 
 echo "[*] Redémarrage du service Apache"
 sudo systemctl restart httpd
