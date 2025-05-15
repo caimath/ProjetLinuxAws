@@ -49,7 +49,5 @@ EOF
 sudo systemctl enable fail2ban || { echo "Failed to enable Fail2Ban. Exiting."; exit 1; }
 sudo systemctl start fail2ban || { echo "Failed to start Fail2Ban. Exiting."; exit 1; }
 
-# Restart Fail2Ban to apply the changes
-sudo systemctl restart fail2ban || { echo "Failed to restart Fail2Ban. Exiting."; exit 1; }
 
 echo "Fail2Ban installed and configured successfully."

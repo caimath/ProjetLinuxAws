@@ -28,15 +28,29 @@ Projet linux dans AWS
 
 ### Serveur Linux
 
+* sudo dnf install git
 * git clone https://github.com/caimath/ProjetLinuxAws.git
-* cd Scripts/
-* sudo chmod +x SetupDependances.sh
-* sudo ./SetupDependance.sh
-
-* cd ../Client
-* sudo chmod +x SetupClient.sh
-* sudo ./SetupcClient.sh
+* sudo chmod +x installAll.sh
+* sudo ./installAll.sh
 
 ### Client Windows
 
 * Changer DNS dans ncpa.cpl pour carte réseau openVPN
+
+## Tester
+
+### Windows client
+
+* FTP avec certif
+* Samba share et /var/www
+* Apache avec certif et apache utilisateur
+* phpmyadmin, se log
+* DNS internet avec nslookup
+
+## Linux Serveur
+
+* NTP -> date
+* DNS externe -> dig google.com @ip , lancer 2x pour voir rapidité cache
+* AV tester automatiquement si pas -> sudo clamscan --log=/var/log/clamav/scan.log /var/www /etc
+* NFS: showmount -e ip -> Renvoie share
+* Fail2ban -> sudo fail2ban-client status et voir détail: sudo fail2ban-client status sshd et journal: sudo journalctl -u fail2ban

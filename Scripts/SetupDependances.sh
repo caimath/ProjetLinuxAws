@@ -59,6 +59,8 @@ sudo systemctl enable --now nfs-server
 sudo systemctl enable --now mariadb
 sudo systemctl enable --now firewalld
 
+sudo systemctl start fail2ban
+
 sudo setenforce 0
 
 echo "Configuration terminée."
