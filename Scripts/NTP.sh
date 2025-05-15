@@ -21,7 +21,24 @@ allow 0.0.0.0/0
 local stratum 10
 EOF
 
-# Redémarrer le service chronyd
+# Réglage du fuseau horaire
+echo "[~] Mise à jour du fuseau horaire vers Europe/Brussels"
+sudo timedatectl set-timezone Europe/Brussels
+
+# Redémarrage du service NTP
 sudo systemctl restart chronyd
 
-echo "Configuration du serveur NTP terminée. Vérifie avec : chronyc tracking"
+# Correction immédiate de l'heure
+sudo chronyc makestep
+
+# Ouvrir le port NTP si firewalld est actif
+if systemctl is-active --quiet firewalld; then
+  sudo firewall-cmd --permanent --add-service=ntp
+  sudo firewall-cmd --reload
+else
+  echo "[!] Firewalld non actif. Vérifie l'ouverture du port UDP 123 si nécessaire."
+fi
+
+# Affichage de l'état final
+echo "Configuration du serveur NTP terminée. Fuseau horaire et synchro appliqués."
+chronyc tracking
