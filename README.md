@@ -6,7 +6,7 @@ Projet linux dans AWS
 
 * [x] SSH & Fail2ban
 * [x] Samba & NFS global sans authentification
-* [x] DNS principal
+* [x] DNS principal + DNS Externe
 * [x] DNS client
 * [x] Apache & Apache client
 * [x] Samba client
@@ -20,7 +20,7 @@ Projet linux dans AWS
 * [x] NTP -> à vérif serv final
 * [ ] Plan de sauvegarde
 * [x] FW -> on va dire
-* [ ] **SELinux** -> Fonctionne pas
+* [x] SELinux
 * [ ] Antivirus
 * [ ] LVM
 

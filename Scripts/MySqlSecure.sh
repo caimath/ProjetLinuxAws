@@ -34,17 +34,17 @@ else
     echo "[*] mysql_secure_installation non trouvé, exécution d'un script alternatif pour sécuriser MariaDB..."
 
     # Supprime les utilisateurs anonymes
-    sudo mysql -e "DELETE FROM mysql.user WHERE User='';"
+    sudo mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='';"
 
     # Désactive les connexions root à distance
-    sudo mysql -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost');"
+    sudo mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost');"
 
     # Supprime la base de données de test
-    sudo mysql -e "DROP DATABASE IF EXISTS test;"
-    sudo mysql -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
+    sudo mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "DROP DATABASE IF EXISTS test;"
+    sudo mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
 
     # Recharge les tables de privilèges
-    sudo mysql -e "FLUSH PRIVILEGES;"
+    sudo mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
 
     echo "[+] Sécurisation alternative de MariaDB terminée avec succès."
 fi
