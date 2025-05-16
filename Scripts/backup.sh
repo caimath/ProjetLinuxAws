@@ -5,7 +5,10 @@
 
 BACKUP_DIR="/backup/$(date +%Y-%m-%d_%H-%M-%S)"
 MYSQL_USER="root"
-MYSQL_PASSWORD="votre_mot_de_passe"
+
+echo -n "Entrez le mot de passe MySQL : "
+read -s MYSQL_PASSWORD
+echo
 
 echo "[INFO] Création du dossier de sauvegarde : $BACKUP_DIR"
 mkdir -p "$BACKUP_DIR"

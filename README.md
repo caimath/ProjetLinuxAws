@@ -46,6 +46,7 @@ Projet linux dans AWS
 * Apache avec certif et apache utilisateur
 * phpmyadmin, se log
 * DNS internet avec nslookup
+* netdata: ip:1999
 
 ## Linux Serveur
 
