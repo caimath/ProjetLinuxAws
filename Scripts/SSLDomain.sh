@@ -107,7 +107,7 @@ cat <<'EOF' > "$DOC_ROOT/index.html"
                     </a>
 
                     <!-- Folder 4 -->
-                    <a href="http://tungtungsahur.lan.19999" target="_blank" class="folder-btn bg-gray-800 rounded-lg p-6 hover:bg-gray-700 border-l-4 border-red-500">
+                    <a href="http://tungtungsahur.lan:19999" target="_blank" class="folder-btn bg-gray-800 rounded-lg p-6 hover:bg-gray-700 border-l-4 border-red-500">
                         <i class="fas fa-shield-alt text-4xl mb-4 text-red-400"></i>
                         <h3 class="text-xl font-semibold mb-2">Monitoring</h3>
                         <p class="text-gray-400 text-sm">Surveiller les ressources</p>
