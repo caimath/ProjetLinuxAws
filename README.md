@@ -55,3 +55,8 @@ Projet linux dans AWS
 * AV tester automatiquement si pas -> sudo clamscan --log=/var/log/clamav/scan.log /var/www /etc
 * NFS: showmount -e ip -> Renvoie share
 * Fail2ban -> sudo fail2ban-client status et voir détail: sudo fail2ban-client status sshd et journal: sudo journalctl -u fail2ban
+* Firewall:
+  * sudo systemctl status firewalld
+  * sudo firewall-cmd --list-all
+  * sudo firewall-cmd --list-all-zones
+  * sudo firewall-cmd --query-port=19999/tcp
