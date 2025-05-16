@@ -42,7 +42,7 @@ Projet linux dans AWS
 ### Windows client
 
 * FTP avec certif
-* Samba share et /var/www
+* Samba share et /var/www & si besoin: net use * /delete /y
 * Apache avec certif et apache utilisateur
 * phpmyadmin, se log
 * DNS internet avec nslookup
