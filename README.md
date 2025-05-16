@@ -48,7 +48,7 @@ Projet linux dans AWS
 * DNS internet avec nslookup
 * netdata: ip:1999
 
-## Linux Serveur
+### Linux Serveur
 
 * NTP -> date
 * DNS externe -> dig google.com @ip , lancer 2x pour voir rapidité cache
