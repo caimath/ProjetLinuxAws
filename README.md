@@ -52,7 +52,7 @@ Projet linux dans AWS
 
 * NTP -> date
 * DNS externe -> dig google.com @ip , lancer 2x pour voir rapidité cache
-* AV tester automatiquement si pas -> sudo clamscan --log=/var/log/clamav/scan.log /var/www /etc
+* AV tester automatiquement si pas -> sudo clamscan --log=/var/log/clamav/scan.log /var/www /etc et /tmp aussi
 * NFS: showmount -e ip -> Renvoie share
 * Fail2ban -> sudo fail2ban-client status et voir détail: sudo fail2ban-client status sshd et journal: sudo journalctl -u fail2ban
 * Firewall:

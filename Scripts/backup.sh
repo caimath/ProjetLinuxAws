@@ -25,6 +25,15 @@ tar czf "$BACKUP_DIR/home.tar.gz" /home
 echo "[INFO] Sauvegarde des bases de données MySQL"
 mysqldump -u $MYSQL_USER -p$MYSQL_PASSWORD --all-databases > "$BACKUP_DIR/all_databases.sql"
 
-sudo 0 3 * * * /home/ec2-user/Scripts/backup.sh >> /var/log/backup_full.log 2>&1
+CRON_FILE="/etc/cron.d/backup-script"
+
+echo "[INFO] Configuration de la tâche CRON pour l'automatisation de sauvegarde"
+sudo mkdir -p /etc/cron.d
+sudo tee "$CRON_FILE" > /dev/null <<EOF
+0 3 * * * root ./backup.sh >> /var/log/backup_full.log 2>&1
+EOF
+
+sudo chmod 644 "$CRON_FILE"
+sudo systemctl restart cron
 
 echo "[INFO] Sauvegarde terminée avec succès."
