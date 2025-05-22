@@ -17,6 +17,8 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -subj "/C=BE/ST=Hainaut/L=Mons/O=TungSahurCorp/OU=Web/CN=$DOMAIN"
 
 # Création du dossier racine si nécessaire
+
+# Création de la page d'accueil
 mkdir -p "$DOC_ROOT"
 cat <<'EOF' > "$DOC_ROOT/index.html"
 <!DOCTYPE html>

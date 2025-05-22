@@ -1,25 +1,22 @@
 #!/bin/bash
 
-#Varialbles
-IP_SRV="10.42.0.34"
+# Variables
+IP_SRV="$(hostname -I | awk '{print $1}')"
 IP_ADMIN="192.168.42.2"
 
-echo "Installing Fail2Ban..."
+echo "Installation de Fail2Ban..."
 
-# Check if Fail2Ban is already installed
+# Vérifie si Fail2Ban est déjà installé
 if ! command -v fail2ban-server &> /dev/null; then
-    sudo dnf install -y fail2ban || { echo "Failed to install Fail2Ban. Exiting."; exit 1; }
+    sudo dnf install -y fail2ban || { echo "Échec de l'installation de Fail2Ban. Abandon."; exit 1; }
 else
-    echo "Fail2Ban is already installed."
+    echo "Fail2Ban est déjà installé."
 fi
 
-
-
-# Create the configuration directory if necessary
+# Crée le dossier de configuration si nécessaire
 sudo mkdir -p /etc/fail2ban/jail.d
 
-# Configure Fail2Ban to protect the SSH service
-# Configure Fail2Ban to protect the SSH service
+# Configure Fail2Ban pour protéger le service SSH
 cat <<EOF | sudo tee /etc/fail2ban/jail.d/sshd.local > /dev/null
 [sshd]
 enabled = true
@@ -32,7 +29,7 @@ findtime = 600
 ignoreip = $IP_ADMIN
 EOF
 
-# Configure Fail2Ban to protect the FTP service
+# Configure Fail2Ban pour protéger le service FTP
 cat <<EOF | sudo tee /etc/fail2ban/jail.d/vsftpd.local > /dev/null
 [vsftpd]
 enabled = true
@@ -45,9 +42,8 @@ findtime = 600
 ignoreip = $IP_ADMIN
 EOF
 
-# Enable and start the Fail2Ban service
-sudo systemctl enable fail2ban || { echo "Failed to enable Fail2Ban. Exiting."; exit 1; }
-sudo systemctl start fail2ban || { echo "Failed to start Fail2Ban. Exiting."; exit 1; }
+# Active et démarre le service Fail2Ban
+sudo systemctl enable fail2ban || { echo "Échec de l'activation de Fail2Ban. Abandon."; exit 1; }
+sudo systemctl start fail2ban || { echo "Échec du démarrage de Fail2Ban. Abandon."; exit 1; }
 
-
-echo "Fail2Ban installed and configured successfully."
+echo "Fail2Ban installé et configuré avec succès."
