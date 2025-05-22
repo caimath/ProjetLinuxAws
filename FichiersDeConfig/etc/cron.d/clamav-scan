@@ -1,0 +1,1 @@
+0 3 * * * root clamscan --log=/var/log/clamav/scan.log /var/www /etc

@@ -1,0 +1,24 @@
+$TTL 86400
+@   IN  SOA ns1.tungtungsahur.lan. admin.tungtungsahur.lan. (
+        2025051602 ; Serial
+        3600    ; Refresh
+        1800    ; Retry
+        1209600 ; Expire
+        86400 ) ; Minimum TTL
+
+@       IN  NS  ns1.tungtungsahur.lan.
+@       IN  A   10.42.0.120
+ns1     IN  A   10.42.0.120
+malaise    IN    A    10.42.0.120
+dambrin    IN    A    10.42.0.120
+[root@ip-10-42-0-120 named]# cat /var/named/0.42.10.rev
+$TTL 86400
+@   IN  SOA ns1.tungtungsahur.lan. admin.tungtungsahur.lan. (
+        2025051601 ; Serial
+        3600    ; Refresh
+        1800    ; Retry
+        1209600 ; Expire
+        86400 ) ; Minimum TTL
+
+@       IN  NS  ns1.tungtungsahur.lan.
+120      IN  PTR ns1.tungtungsahur.lan.

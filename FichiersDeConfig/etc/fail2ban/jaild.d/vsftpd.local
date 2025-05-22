@@ -1,0 +1,9 @@
+[vsftpd]
+enabled = true
+port = 21
+action = %(action_mwl)s
+logpath = /var/log/vsftpd.log
+maxretry = 3
+bantime = 600
+findtime = 600
+ignoreip = 192.168.42.2

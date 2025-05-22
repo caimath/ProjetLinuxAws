@@ -5,31 +5,31 @@ NFS_SHARE_DIR="/srv/nfs/share"
 EXPORTS_FILE="/etc/exports"
 SAMBA_CONF="/etc/samba/smb.conf"
 
-# Creating the directory for NFS share
-echo "Creating the NFS share directory..."
+# Création du répertoire pour le partage NFS
+echo "Création du répertoire de partage NFS..."
 sudo mkdir -p "$NFS_SHARE_DIR"
 sudo chown -R nobody:nobody "$NFS_SHARE_DIR"
 sudo chmod -R 777 "$NFS_SHARE_DIR"
 
-# Enabling and starting NFS services
-echo "Enabling and starting NFS services..."
+# Activation et démarrage des services NFS
+echo "Activation et démarrage des services NFS..."
 sudo systemctl enable rpcbind --now
 sudo systemctl enable nfs-server --now
 
-# Configuring NFS export
-echo "Configuring NFS export..."
+# Configuration de l'export NFS
+echo "Configuration de l'export NFS..."
 if ! grep -q "$NFS_SHARE_DIR" "$EXPORTS_FILE"; then
     echo "$NFS_SHARE_DIR *(ro,sync,no_subtree_check)" | sudo tee -a "$EXPORTS_FILE" > /dev/null
 fi
 
 sudo exportfs -rav
 
-# Installing Samba
-echo "Installing Samba..."
+# Installation de Samba
+echo "Installation de Samba..."
 sudo dnf install -y samba samba-common
 
-# Configuring Samba
-echo "Configuring Samba..."
+# Configuration de Samba
+echo "Configuration de Samba..."
 if ! grep -q "map to guest = Bad User" "$SAMBA_CONF"; then
     sudo sed -i '/\[global\]/a map to guest = Bad User' "$SAMBA_CONF"
 fi
@@ -47,9 +47,9 @@ if ! grep -q "\[share\]" "$SAMBA_CONF"; then
 EOF
 fi
 
-# Enabling and starting Samba services
-echo "Enabling and starting Samba services..."
+# Activation et démarrage des services Samba
+echo "Activation et démarrage des services Samba..."
 sudo systemctl enable smb --now
 sudo systemctl enable nmb --now
 
-echo "Configuration completed successfully."
+echo "Configuration terminée avec succès."
