@@ -46,7 +46,7 @@ if [ "$SAMBA_PASSWORD" != "$SAMBA_PASSWORD_CONFIRM" ]; then
     exit 1
 fi
 
-# Demande un mot de passe à l'utilisateur pour Samba
+# Demande un mot de passe à l'utilisateur pour la base de données
 read -s -p "Mot de passe DB pour $CLIENT : " DB_PASSWORD
 echo
 read -s -p "Confirmez le mot de passe : " DB_PASSWORD_CONFIRM
